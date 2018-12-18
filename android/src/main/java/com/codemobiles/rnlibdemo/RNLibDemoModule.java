@@ -19,8 +19,17 @@ public class RNLibDemoModule extends ReactContextBaseJavaModule {
         return "RNLibDemo";
     }
 
-    @ReactMethod
-    public void sampleMethod(String stringArgument, int numberArgument, Callback callback) {
-        // TODO: Implement
-    }
+    @Nullable
+       @Override
+       public Map<String, Object> getConstants() {
+           final Map<String, Object> constants = new HashMap<>();
+           constants.put("SHORT", Toast.LENGTH_SHORT);
+           constants.put("LONG", Toast.LENGTH_LONG);
+           return constants;
+       }
+
+       @ReactMethod
+       public void show(String message, int duration) {
+           Toast.makeText(getReactApplicationContext(), message, duration).show();
+       }
 }
